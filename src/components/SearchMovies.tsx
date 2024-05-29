@@ -15,7 +15,6 @@ function SearchMovies() {
     const [error, SetError] = useState();
     const { ref, inView } = useInView();
 
-    console.log("rerenderd", query);
     useEffect(() => {
         if (inView) {
             handleQuery();
@@ -30,10 +29,8 @@ function SearchMovies() {
                     if (res.data.Error === "Movie not found!") {
                         SetError(res.data.Error);
                     } else {
-                        console.log(res.data);
                         page++;
                         limit = res.data.totalResults * 1;
-                        console.log(page, limit);
                         setMovies([...movies, ...res.data.Search]);
                     }
                 })
@@ -43,7 +40,6 @@ function SearchMovies() {
         }
         setIsLoading(false);
     };
-    console.log(isLoading);
     return (
         <section>
             <div className="w-full">

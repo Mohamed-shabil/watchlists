@@ -22,7 +22,6 @@ function Signin() {
         resolver: zodResolver(schema),
     });
     const onSubmit: SubmitHandler<FormFields> = (value) => {
-        console.log(value);
         dispatch(setUser(value));
         toast.success("Login Successfull");
         navigate("/");

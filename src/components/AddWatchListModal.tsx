@@ -21,7 +21,6 @@ function AddWatchListModal({ user }: { user: IUser }) {
     const dispatch = useDispatch();
 
     const onSubmit: SubmitHandler<FormFields> = (value) => {
-        console.log(value);
         dispatch(addWatchList({ email: user.email, name: value.name }));
         setOpen(false);
         form.reset();
