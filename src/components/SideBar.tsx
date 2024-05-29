@@ -32,14 +32,6 @@ function SideBar() {
                     <h2 className="text-4xl tracking-wider font-extrabold text-center text-rose-500">
                         Watchlists
                     </h2>
-                    <div className="w-full">
-                        <input
-                            name="search"
-                            type="text"
-                            placeholder="Search"
-                            className="mt-6 border w-full rounded-md py-2 px-3"
-                        />
-                    </div>
                 </div>
                 <ul className="flex">
                     <li className="w-full py-2 px-3 text-white bg-rose-500 rounded-md cursor-pointer">
