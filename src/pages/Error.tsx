@@ -1,8 +1,7 @@
 import { Home } from "lucide-react";
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Error({ text }: { text: string }) {
-    const error = useRouteError();
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <h2 className="text-xl font-medium">Oops...</h2>
