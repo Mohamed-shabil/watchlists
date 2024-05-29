@@ -10,9 +10,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 
 const schema = z.object({
-    name: z.string().refine((data) => !/\s/.test(data), {
-        message: "Watchlist name should not contain spaces",
-    }),
+    name: z
+        .string()
+        .min(3, {
+            message: "Watchlist name must be atleast 3 characters long",
+        })
+        .refine((data) => !/\s/.test(data), {
+            message: "Watchlist name should not contain spaces",
+        }),
 });
 type FormFields = z.infer<typeof schema>;
 

@@ -6,25 +6,43 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { IMovie } from "../types/types";
 import { RootState } from "../redux/store";
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+    name: z.string().min(1, { message: "choose a watchlist" }),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 function SelectWatchListModal({ movie }: { movie: IMovie }) {
     const [open, setOpen] = useState<boolean>(false);
-    const [list, setList] = useState<string>("");
     const dispatch = useDispatch();
     const watchLists = useSelector((state: RootState) => state.watchLists);
     const user = useSelector((state: RootState) => state.auth.user);
     const lists = Object.keys(watchLists[user?.email!]);
-    const handleAddToWatchList = () => {
+
+    const form = useForm<FormFields>({
+        defaultValues: {
+            name: "",
+        },
+        mode: "onTouched",
+        resolver: zodResolver(schema),
+    });
+    const onSubmit: SubmitHandler<FormFields> = (value) => {
+        console.log(value);
         dispatch(
             addMovieToWatchList({
                 email: user?.email!,
-                name: list,
+                name: value.name,
                 movie,
             })
         );
         toast.success("Movie added to watchlist", {
             duration: 2000,
         });
+        setOpen(false);
     };
     return (
         <div>
@@ -36,6 +54,7 @@ function SelectWatchListModal({ movie }: { movie: IMovie }) {
             </button>
             <Modal
                 onClose={() => {
+                    form.reset();
                     setOpen(false);
                 }}
                 open={open}
@@ -46,47 +65,50 @@ function SelectWatchListModal({ movie }: { movie: IMovie }) {
                             Select Watchlist
                         </h2>
                     </div>
-                    <div className="flex flex-col mx-2">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="flex flex-col mx-2"
+                    >
                         {lists.length ? (
-                            lists.map((item, index) => (
-                                <div key={index}>
-                                    <div className="flex gap-3 text-sm">
-                                        <input
-                                            type="radio"
-                                            name="watchlist"
-                                            id={index.toString()}
-                                            value={item}
-                                            checked={list === item}
-                                            onChange={() => {
-                                                setList(item);
-                                            }}
-                                        />
-                                        <label
-                                            htmlFor={index.toString()}
-                                            className="text-sm capitalize"
-                                        >
-                                            {item}
-                                        </label>
+                            <div>
+                                {lists.map((item, index) => (
+                                    <div key={index}>
+                                        <div className="flex gap-3 text-sm">
+                                            <input
+                                                type="radio"
+                                                id={index.toString()}
+                                                value={item}
+                                                {...form.register("name")}
+                                            />
+                                            <label
+                                                htmlFor={index.toString()}
+                                                className="text-sm capitalize"
+                                            >
+                                                {item}
+                                            </label>
+                                        </div>
                                     </div>
-                                    <button
-                                        onClick={() => {
-                                            handleAddToWatchList();
-                                            setOpen(false);
-                                        }}
-                                        className="bg-rose-500 text-white w-fit mt-4 inline-flex items-center 
+                                ))}
+                                {form.formState.errors.name && (
+                                    <div className="text-red-500 text-sm">
+                                        {form.formState.errors.name.message}
+                                    </div>
+                                )}
+                                <button
+                                    type="submit"
+                                    className="bg-rose-500 text-white w-fit mt-4 inline-flex items-center 
                                         justify-center rounded-md text-sm font-medium h-10 px-4 py-2"
-                                    >
-                                        Add to Watchlist
-                                    </button>
-                                </div>
-                            ))
+                                >
+                                    Add to Watchlist
+                                </button>
+                            </div>
                         ) : (
                             <h2 className="font-medium text-sm text-left">
                                 You don't have any watchlists, create a
                                 watchlist to save movies
                             </h2>
                         )}
-                    </div>
+                    </form>
                 </div>
             </Modal>
         </div>
