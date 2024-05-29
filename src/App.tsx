@@ -12,7 +12,7 @@ function App() {
         {
             path: "/",
             element: <Home />,
-            errorElement: <Error text="Something went wrong" />,
+            errorElement: <Error text={"Something went wrong.."} />,
             children: [
                 {
                     path: "/",
@@ -39,6 +39,10 @@ function App() {
         {
             path: "/signup",
             element: <Signup />,
+        },
+        {
+            path: "*",
+            element: <Error text={"Page Not Found"} />,
         },
     ]);
     return (

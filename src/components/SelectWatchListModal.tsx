@@ -49,7 +49,7 @@ function SelectWatchListModal({ movie }: { movie: IMovie }) {
                     <div className="flex flex-col mx-2">
                         {lists.length ? (
                             lists.map((item, index) => (
-                                <>
+                                <div key={index}>
                                     <div className="flex gap-3 text-sm">
                                         <input
                                             type="radio"
@@ -78,7 +78,7 @@ function SelectWatchListModal({ movie }: { movie: IMovie }) {
                                     >
                                         Add to Watchlist
                                     </button>
-                                </>
+                                </div>
                             ))
                         ) : (
                             <h2 className="font-medium text-sm text-left">

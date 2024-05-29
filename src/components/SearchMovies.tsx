@@ -40,6 +40,7 @@ function SearchMovies() {
         }
         setIsLoading(false);
     };
+    console.log("laoding", isLoading);
     return (
         <section>
             <div className="w-full">

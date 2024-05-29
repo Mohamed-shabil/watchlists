@@ -15,9 +15,6 @@ function WatchList() {
     }
     // @ts-ignore
     const movies = watchLists[user.email][watchlist];
-    if (!movies) {
-        throw new Error("No Watch List with this name");
-    }
     return (
         <section>
             <h2 className="capitalize text-xl font-semibold my-10">
