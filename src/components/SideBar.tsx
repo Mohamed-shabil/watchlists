@@ -9,7 +9,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 function SideBar() {
     const watchList = useSelector((state: RootState) => state.watchLists);
-
     const user = useSelector((state: RootState) => state.auth.user);
 
     const [visible, setVisible] = useState<boolean>(false);
@@ -21,7 +20,8 @@ function SideBar() {
         navigate("/signin");
     };
     if (!user) {
-        throw new Error("Please Signup to continue");
+        navigate("/signin");
+        return <p>No User found</p>;
     }
     return (
         <aside className="h-screen max-w-72 w-full">

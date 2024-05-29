@@ -44,9 +44,6 @@ function App() {
     return (
         <main>
             <Toaster />
-            {/* <Home />
-            <Signin />
-            <Signup /> */}
             <RouterProvider router={router} />
         </main>
     );
