@@ -23,7 +23,7 @@ function SideBar() {
         navigate("/signin");
         return <p>No User found</p>;
     }
-    const watchLists = Object.keys(watchList[user.email!]);
+    const watchLists = watchList ? Object.keys(watchList[user.email!]) : [];
 
     return (
         <aside className="h-screen max-w-72 w-full">

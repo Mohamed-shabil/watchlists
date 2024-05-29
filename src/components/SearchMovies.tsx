@@ -52,11 +52,12 @@ function SearchMovies() {
                 })
                 .catch((err: any) => {
                     SetError(err);
+                })
+                .finally(() => {
+                    setIsLoading(false);
                 });
         }
-        setIsLoading(false);
     };
-    console.log("loading", isLoading);
     return (
         <section>
             <div className="w-full">
@@ -87,7 +88,7 @@ function SearchMovies() {
                     xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 auto-rows-auto"
                 >
                     {!!isLoading && (
-                        <div className="w-full h-28 flex justify-center items-center cols-span-6">
+                        <div className="w-full h-28 flex justify-center items-center col-span-6">
                             <Loader
                                 className="animate-spin text-rose-500"
                                 size={25}
@@ -99,7 +100,7 @@ function SearchMovies() {
                             Movie Not Found
                         </h2>
                     )}
-                    {movies.length === 0 && (
+                    {!isLoading && movies.length === 0 && (
                         <h2 className="text-sm font-medium text-center col-span-6">
                             Search for Movies
                         </h2>

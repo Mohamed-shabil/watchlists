@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/slices/userSlice";
+import { addWatchList } from "../redux/slices/watchListSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +24,7 @@ function Signin() {
     });
     const onSubmit: SubmitHandler<FormFields> = (value) => {
         dispatch(setUser(value));
+        dispatch(addWatchList({ email: value.email, name: "Favourites" }));
         toast.success("Login Successfull");
         navigate("/");
     };
