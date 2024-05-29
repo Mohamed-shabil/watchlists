@@ -23,6 +23,8 @@ function SideBar() {
         navigate("/signin");
         return <p>No User found</p>;
     }
+    const watchLists = Object.keys(watchList[user.email!]);
+
     return (
         <aside className="h-screen max-w-72 w-full">
             <nav className="h-full flex flex-col border-r shadow-sm p-3">
@@ -52,45 +54,40 @@ function SideBar() {
                 <hr className="my-4" />
                 <h2 className="pl-2 font-medium text-xl">My Lists</h2>
                 <ul className="flex-1 my-2">
-                    {watchList[user.email] &&
-                        Object.keys(watchList[user.email!]).map(
-                            (list, index) => (
-                                <li
-                                    className="w-full border rounded-md my-1 group/item flex justify-between px-3"
-                                    key={index}
-                                >
-                                    <Link to={`/watchlist/${list}`}>
-                                        <div className="flex items-center justify-between py-2">
-                                            <span className="flex text-sm font-normal">
-                                                <Film
-                                                    size={20}
-                                                    className="mr-2"
-                                                />
-                                                {list}
-                                            </span>
-                                        </div>
-                                    </Link>
-                                    <button
-                                        className="outline-none border-none hidden group-hover/item:block 
+                    {!!watchLists.length &&
+                        watchLists.map((list, index) => (
+                            <li
+                                className="w-full border rounded-md my-1 group/item flex justify-between px-3"
+                                key={index}
+                            >
+                                <Link to={`/watchlist/${list}`}>
+                                    <div className="flex items-center justify-between py-2">
+                                        <span className="flex text-sm font-normal">
+                                            <Film size={20} className="mr-2" />
+                                            {list}
+                                        </span>
+                                    </div>
+                                </Link>
+                                <button
+                                    className="outline-none border-none hidden group-hover/item:block 
                                         group-hover/item:transition group-hover/item:ease-in-out 
                                         group-hover/item:delay-150"
-                                        onClick={() => {
-                                            dispatch(
-                                                removeWatchList({
-                                                    email: user?.email,
-                                                    name: list,
-                                                })
-                                            );
-                                        }}
-                                    >
-                                        <Trash
-                                            size={18}
-                                            className="text-rose-500"
-                                        />
-                                    </button>
-                                </li>
-                            )
-                        )}
+                                    onClick={() => {
+                                        dispatch(
+                                            removeWatchList({
+                                                email: user?.email,
+                                                name: list,
+                                            })
+                                        );
+                                    }}
+                                >
+                                    <Trash
+                                        size={18}
+                                        className="text-rose-500"
+                                    />
+                                </button>
+                            </li>
+                        ))}
                 </ul>
                 <AddWatchListModal user={user} />
                 <div className="border-t flex p-2">

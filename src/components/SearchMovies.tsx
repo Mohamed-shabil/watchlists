@@ -11,18 +11,34 @@ let limit = Infinity;
 function SearchMovies() {
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [query, setQuery] = useState<string>("");
+    const [prevQuery, setPrevQuery] = useState<string>("");
+    const [changeQuery, setChangeQuery] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, SetError] = useState();
     const { ref, inView } = useInView();
 
     useEffect(() => {
+        if (query !== prevQuery) {
+            setChangeQuery(true);
+            page = 1;
+            limit = Infinity;
+            setPrevQuery(query);
+        }
+    }, [query]);
+
+    useEffect(() => {
         if (inView) {
             handleQuery();
         }
-    }, [inView, movies, query]);
+    }, [inView]);
 
     const handleQuery = async () => {
+        if (!query) return;
         setIsLoading(true);
+        if (changeQuery) {
+            setMovies([]);
+            setChangeQuery(false);
+        }
         if (page * 10 <= limit) {
             queryMovies(query, page)
                 .then((res) => {
@@ -40,7 +56,7 @@ function SearchMovies() {
         }
         setIsLoading(false);
     };
-    console.log("laoding", isLoading);
+    console.log("loading", isLoading);
     return (
         <section>
             <div className="w-full">

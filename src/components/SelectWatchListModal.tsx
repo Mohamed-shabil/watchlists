@@ -14,6 +14,7 @@ function SelectWatchListModal({ movie }: { movie: IMovie }) {
     const watchLists = useSelector((state: RootState) => state.watchLists);
     const user = useSelector((state: RootState) => state.auth.user);
     const lists = Object.keys(watchLists[user?.email!]);
+    console.log(lists);
     const handleAddToWatchList = () => {
         dispatch(
             addMovieToWatchList({
