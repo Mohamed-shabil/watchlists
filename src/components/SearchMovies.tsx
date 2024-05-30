@@ -116,7 +116,7 @@ function SearchMovies() {
                             </MovieCard>
                         ))}
                     {!!movies.length && page * 10 <= limit && (
-                        <div className="w-full h-28 flex justify-center items-center">
+                        <div className="w-full h-28 flex justify-center items-center col-span-6">
                             <Loader
                                 ref={ref}
                                 className="animate-spin"
