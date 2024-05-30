@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Watchlist
 
-Currently, two official plugins are available:
+Streamlined Watchlist Management Toolkit
+Effortless Movie Tracking and Management Made Simple with the Watchlists .
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Features
+User Management
+- Account Creation and Authentication
+- Personalized Watchlists
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Watchlist Management
+- Movie Search
+- Add/Remove Movies
+- Add/Remove Watchlists
+ 
+ ## Technology Stack
+**Frontend Development**
+- **React.js**
+- **TypeScript**
+- **Redux Persist**
+- **Tailwind CSS**
+- **react-hook-form**
+- **Framer Motion**
 
-- Configure the top-level `parserOptions` property like this:
+**API Integration**
+- **OMDB API**: Fetches movie data efficiently.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+
+## Run Locally
+
+#### 1. Clone the project
+
+```bash
+  git clone https://github.com/Mohamed-shabil/watchlists.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### 2. Go to the project directory
+
+```bash
+  cd watchlists
+```
+
+#### 3. Install dependencies
+
+```bash
+  npm install
+```
+#### 4. Setup ENV variables
+
+```bash
+VITE_API_KEY=[your api key for the omdb api]
+VITE_BASE_URL=https://www.omdbapi.com/
+
+```
+#### 5. Start the development server:
+```bash
+  npm run start
+```
+
+#### 6. Access the application in your browser at http://localhost:5173
+
+
