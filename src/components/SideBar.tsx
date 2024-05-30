@@ -29,14 +29,14 @@ function SideBar() {
         <aside className="h-screen max-w-72 w-full">
             <nav className="h-full flex flex-col border-r shadow-sm p-3">
                 <div className="pb-2 flex flex-col justify-center items-center my-3">
-                    <h2 className="text-4xl tracking-wider font-extrabold text-center text-rose-500">
+                    <h2 className="text-4xl font-semibold leading-none tracking-tight text-center text-rose-500">
                         Watchlists
                     </h2>
                 </div>
                 <ul className="flex">
                     <li className="w-full py-2 px-3 text-white bg-rose-500 rounded-md cursor-pointer">
                         <Link to="/">
-                            <div className="flex items-center">
+                            <div className="flex items-center text-sm">
                                 <HomeIcon size={20} className="mr-2" />
                                 Home
                             </div>
